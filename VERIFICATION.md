@@ -27,15 +27,7 @@
 
 📸 Screenshot: screenshots/sync_success.png
 
----
 
-## ✅ 4. Retry Scenario
-
-* Simulated API failure
-* Retry triggered
-* No duplicate data
-
-📸 Screenshot: screenshots/retry.png
 
 ---
 
