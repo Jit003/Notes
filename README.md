@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 📱 Offline Notes App (Flutter)
 
 ## 📌 Overview
@@ -218,3 +219,7 @@ All responses were reviewed, modified, and tested manually before implementation
 This project focuses on **real-world offline-first challenges**, including data consistency, reliability, and user experience. The goal was to build something close to production thinking rather than just a basic CRUD app.
 
 ---
+=======
+# Notes
+Built a Flutter offline-first notes app using Hive for local storage and Firebase for backend. Supports offline add/delete with a sync queue, retry logic, and idempotency. Ensures instant UI updates, smooth UX, and reliable data syncing when connectivity returns.
+>>>>>>> 3f7f7922330f08654edfde105a97f9af7c3b3fc8
