@@ -13,6 +13,8 @@ class SyncService {
 
     for (var item in items) {
       try {
+        print("[SYNC] Processing: ${item.id}");
+
         if (item.type == "add_note") {
           await _remote.addNoteFromJson(item.payload);
         }

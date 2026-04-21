@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../core/services/connectivity_services.dart';
 import '../../../data/models/note_model.dart';
 import '../../../data/repositories/note_repository.dart';
 
@@ -17,6 +18,7 @@ class NoteNotifier extends StateNotifier<List<NoteModel>> {
   }
 
   final _repo = NoteRepository();
+  final _network = ConnectivityService(); // ✅ use service
 
   Future<void> loadNotes() async {
     isLoading = true;
@@ -34,20 +36,19 @@ class NoteNotifier extends StateNotifier<List<NoteModel>> {
       updatedAt: DateTime.now(),
     );
 
-    // 🔥 STEP 1: Update UI instantly
+    // 🔥 optimistic UI
     state = [note, ...state];
-    final connectivityResult = await Connectivity().checkConnectivity();
-    final isOnline = connectivityResult != ConnectivityResult.none;
 
-    // 🔥 STEP 2: Do actual work in background
+    final isOnline = await _network.isConnected(); // ✅ FIX
+
     await _repo.addNote(note, isOnline: isOnline);
   }
-  Future<void> deleteNote(NoteModel note) async {
-    final connectivityResult = await Connectivity().checkConnectivity();
-    final isOnline = connectivityResult != ConnectivityResult.none;
 
-    // 🔥 update UI instantly
+  Future<void> deleteNote(NoteModel note) async {
+    // 🔥 optimistic UI
     state = state.where((e) => e.id != note.id).toList();
+
+    final isOnline = await _network.isConnected(); // ✅ FIX
 
     await _repo.deleteNote(note, isOnline: isOnline);
   }

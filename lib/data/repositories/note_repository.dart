@@ -23,6 +23,7 @@ class NoteRepository {
       );
 
       await _queue.addToQueue(queueItem);
+
     }
   }
 

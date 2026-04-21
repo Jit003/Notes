@@ -6,6 +6,10 @@ class QueueLocalDataSource {
 
   Future<void> addToQueue(QueueItemModel item) async {
     await box.put(item.id, item.toJson());
+
+    // 🔥 ADD LOGS HERE
+    print("[QUEUE] Added: ${item.id}");
+    print("[QUEUE] Size: ${box.length}");
   }
 
   List<QueueItemModel> getQueue() {
